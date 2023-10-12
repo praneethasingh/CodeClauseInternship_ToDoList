@@ -18,6 +18,25 @@ input[type="text"] {
     padding: 10px;
 }
 
+/* Your existing CSS styles here */
+
+.container {
+    display: flex;
+}
+
+.left-side {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.right-side {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Additional styling for the new elements as needed */
+
 button {
     padding: 10px 20px;
     background-color: #333;
