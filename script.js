@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const taskText = taskInput.value.trim();
         if (taskText === "") return;
 
+        taskList.appendChild(taskItem);
+        taskInput.value = "";
+
         // Get the values of the new elements
         const priority = document.getElementById("priority").value;
         const timeframe = document.getElementById("timeframe").value;
@@ -35,7 +38,5 @@ document.addEventListener("DOMContentLoaded", function () {
             taskItem.classList.toggle("completed");
         });
 
-        taskList.appendChild(taskItem);
-        taskInput.value = "";
     }
 });
