@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -27,7 +29,7 @@ input[type="text"] {
 
 .left-side {
     flex: 1;
-    padding: 20px;
+    padding: 5px;
     border-right: 1px solid #ccc;
 }
 
