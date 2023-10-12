@@ -14,9 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const taskText = taskInput.value.trim();
         if (taskText === "") return;
 
-        taskList.appendChild(taskItem);
-        taskInput.value = "";
-
         // Get the values of the new elements
         const priority = document.getElementById("priority").value;
         const timeframe = document.getElementById("timeframe").value;
@@ -26,17 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const timeOfDay = document.getElementById("time-of-day").value;
 
         const taskItem = document.createElement("li");
-        taskItem.innerHTML = `<b>Priority: ${priority}</b><br>
+        taskItem.innerHTML = `<b>Task: ${taskText}</b><br>`;
+                              <b>Priority: ${priority}</b><br>
                               <b>Time Frame: ${timeframe}</b><br>
                               <b>Task Type: ${taskType}</b><br>
                               <b>Urgency: ${urgency}</b><br>
                               <b>Mood and Energy: ${moodEnergy}</b><br>
-                              <b>Time of Day: ${timeOfDay}</b><br>
-                              Task: ${taskText}`;
+                              <b>Time of Day: ${timeOfDay}</b><br>;
 
         taskItem.addEventListener("click", function () {
             taskItem.classList.toggle("completed");
         });
+
+        taskList.appendChild(taskItem);
+        taskInput.value = "";
 
     }
 });
