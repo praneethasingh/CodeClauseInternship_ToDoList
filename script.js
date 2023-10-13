@@ -16,25 +16,35 @@ document.addEventListener("DOMContentLoaded", function () {
         if (taskText === "") return;
 
         const taskItem = document.createElement("li");
-        taskItem.textContent = taskText;
 
-        const attributeNames = [
-            "Priority",
-            "Time Frame",
-            "Task Type",
-            "Urgency",
-            "Mood and Energy",
-            "Time of Day",
-        ];
+        // Make the task name bold
+        const taskNameElement = document.createElement("strong");
+        taskNameElement.textContent = taskText;
+
+        taskItem.appendChild(taskNameElement);
+
+        const attributes = {
+            Priority: prioritySelect.value,
+            Timeframe: timeframeSelect.value,
+            "Task Type": taskTypeSelect.value,
+            Urgency: urgencySelect.value,
+            "Mood and Energy": moodEnergySelect.value,
+            "Time of Day": timeOfDaySelect.value,
+        };
 
         const attributesList = document.createElement("ul");
 
-        for (let i = 0; i < attributeNames.length; i++) {
-            const attributeName = attributeNames[i];
-            const attributeValue = getSelectedValue(i);
+        for (const [attributeName, attributeValue] of Object.entries(attributes)) {
             if (attributeValue !== "") {
                 const attributeItem = document.createElement("li");
-                attributeItem.textContent = `${attributeName}: ${attributeValue}`;
+
+                // Make the attribute name bold
+                const attributeNameElement = document.createElement("strong");
+                attributeNameElement.textContent = attributeName;
+
+                attributeItem.appendChild(attributeNameElement);
+
+                attributeItem.innerHTML += `: ${attributeValue}`;
                 attributesList.appendChild(attributeItem);
             }
         }
@@ -43,16 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         taskList.appendChild(taskItem);
         taskInput.value = "";
     }
-
-    function getSelectedValue(index) {
-        switch (index) {
-            case 0: return prioritySelect.value;
-            case 1: return timeframeSelect.value;
-            case 2: return taskTypeSelect.value;
-            case 3: return urgencySelect.value;
-            case 4: return moodEnergySelect.value;
-            case 5: return timeOfDaySelect.value;
-            default: return "";
-        }
-    }
 });
+
+
