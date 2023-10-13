@@ -21,26 +21,42 @@ document.addEventListener("DOMContentLoaded", function () {
         if (taskText === "") return;
 
         const taskItem = document.createElement("li");
-        taskItem.textContent = taskText;
 
-        const attributes = {
-            Priority: prioritySelect.value,
-            Timeframe: timeframeSelect.value,
-            "Task Type": taskTypeSelect.value,
-            Urgency: urgencySelect.value,
-            "Mood and Energy": moodEnergySelect.value,
-            "Time of Day": timeOfDaySelect.value,
-        };
-
-        for (const [key, value] of Object.entries(attributes)) {
-            if (value !== "") {
-                const attributeItem = document.createElement("div");
-                attributeItem.textContent = key + ": " + value;
-                taskItem.appendChild(attributeItem);
-            }
+        const taskAttributes = [];
+        
+        if (prioritySelect.value !== "Select Priority") {
+            taskAttributes.push(prioritySelect.value);
         }
 
+        if (timeframeSelect.value !== "Select Time Frame") {
+            taskAttributes.push(timeframeSelect.value);
+        }
+
+        if (taskTypeSelect.value !== "Select Task Type") {
+            taskAttributes.push(taskTypeSelect.value);
+        }
+
+        if (urgencySelect.value !== "Select Urgency") {
+            taskAttributes.push(urgencySelect.value);
+        }
+
+        if (moodEnergySelect.value !== "Select Mood and Energy") {
+            taskAttributes.push(moodEnergySelect.value);
+        }
+
+        if (timeOfDaySelect.value !== "Select Time of Day") {
+            taskAttributes.push(timeOfDaySelect.value);
+        }
+
+        if (taskAttributes.length > 0) {
+            const attributesDiv = document.createElement("div");
+            attributesDiv.innerHTML = `<strong>Attributes:</strong> ${taskAttributes.join(", ")}`;
+            taskItem.appendChild(attributesDiv);
+        }
+
+        taskItem.innerHTML += `<strong>Task:</strong> ${taskText}`;
         taskList.appendChild(taskItem);
         taskInput.value = "";
     }
 });
+
