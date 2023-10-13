@@ -40,3 +40,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 });
+
+
+function displayTasks(taskList) {
+        // Clear existing task notes
+        taskContainer.innerHTML = "";
+
+        taskList.forEach(task => {
+            const taskNote = document.createElement("div");
+            taskNote.classList.add("task-note");
+            taskNote.innerHTML = `
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
+                <p>Priority: ${task.priority}</p>
+                <p>Timeframe: ${task.timeframe}</p>
+                <!-- Add more task properties here -->
+            `;
+
+            taskContainer.appendChild(taskNote);
+        });
+    }
+});
