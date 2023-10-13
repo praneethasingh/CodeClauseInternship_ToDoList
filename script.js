@@ -44,15 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 attributeItem.appendChild(attributeNameElement);
 
-                attributeItem.innerHTML += `: ${attributeValue}`;
+                attributeItem.innerHTML += : ${attributeValue};
                 attributesList.appendChild(attributeItem);
             }
         }
 
         taskItem.appendChild(attributesList);
         taskList.appendChild(taskItem);
-        taskInput.value = "";
-    }
+        taskInput.value = "";
+    }
 });
-
-
