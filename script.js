@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("add");
     const taskList = document.getElementById("task-list");
 
+    const prioritySelect = document.getElementById("priority");
+    const timeframeSelect = document.getElementById("timeframe");
+    const taskTypeSelect = document.getElementById("task-type");
+    const urgencySelect = document.getElementById("urgency");
+    const moodEnergySelect = document.getElementById("mood-energy");
+    const timeOfDaySelect = document.getElementById("time-of-day");
+
     addButton.addEventListener("click", addTask);
     taskInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
@@ -10,54 +17,61 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Add an event listener to each filter dropdown
+    const filterDropdowns = [
+        prioritySelect,
+        timeframeSelect,
+        taskTypeSelect,
+        urgencySelect,
+        moodEnergySelect,
+        timeOfDaySelect,
+    ];
+
+    filterDropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("change", filterTasks);
+    });
+
     function addTask() {
         const taskText = taskInput.value.trim();
         if (taskText === "") return;
 
-        // Get the values of the new elements
-        const priority = document.getElementById("priority").value;
-        const timeframe = document.getElementById("timeframe").value;
-        const taskType = document.getElementById("task-type").value;
-        const urgency = document.getElementById("urgency").value;
-        const moodEnergy = document.getElementById("mood-energy").value;
-        const timeOfDay = document.getElementById("time-of-day").value;
-
         const taskItem = document.createElement("li");
-        taskItem.innerHTML = `<b>Task: ${taskText}</b><br>`;
-                              <b>Priority: ${priority}</b><br>
-                              <b>Time Frame: ${timeframe}</b><br>
-                              <b>Task Type: ${taskType}</b><br>
-                              <b>Urgency: ${urgency}</b><br>
-                              <b>Mood and Energy: ${moodEnergy}</b><br>
-                              <b>Time of Day: ${timeOfDay}</b><br>;
-
-        taskItem.addEventListener("click", function () {
-            taskItem.classList.toggle("completed");
-        });
+        taskItem.textContent = taskText;
 
         taskList.appendChild(taskItem);
         taskInput.value = "";
-
     }
-});
 
+    function filterTasks() {
+        const filters = {
+            priority: prioritySelect.value,
+            timeframe: timeframeSelect.value,
+            taskType: taskTypeSelect.value,
+            urgency: urgencySelect.value,
+            moodEnergy: moodEnergySelect.value,
+            timeOfDay: timeOfDaySelect.value,
+        };
 
-function displayTasks(taskList) {
-        // Clear existing task notes
-        taskContainer.innerHTML = "";
+        // Loop through the task items and check if they match the filters
+        const taskItems = taskList.getElementsByTagName("li");
+        for (let i = 0; i < taskItems.length; i++) {
+            const taskItem = taskItems[i];
+            const taskDetails = taskItem.textContent;
 
-        taskList.forEach(task => {
-            const taskNote = document.createElement("div");
-            taskNote.classList.add("task-note");
-            taskNote.innerHTML = `
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                <p>Priority: ${task.priority}</p>
-                <p>Timeframe: ${task.timeframe}</p>
-                <!-- Add more task properties here -->
-            `;
+            if (isTaskFiltered(taskDetails, filters)) {
+                taskItem.style.display = "block";
+            } else {
+                taskItem.style.display = "none";
+            }
+        }
+    }
 
-            taskContainer.appendChild(taskNote);
-        });
+    function isTaskFiltered(taskDetails, filters) {
+        for (const key in filters) {
+            if (filters[key] !== "All" && taskDetails.indexOf(filters[key]) === -1) {
+                return false;
+            }
+        }
+        return true;
     }
 });
