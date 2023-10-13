@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const taskInput = document.getElementById("task");
     const addButton = document.getElementById("add");
     const taskList = document.getElementById("task-list");
-
     const prioritySelect = document.getElementById("priority");
     const timeframeSelect = document.getElementById("timeframe");
     const taskTypeSelect = document.getElementById("task-type");
@@ -17,20 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Add an event listener to each filter dropdown
-    const filterDropdowns = [
-        prioritySelect,
-        timeframeSelect,
-        taskTypeSelect,
-        urgencySelect,
-        moodEnergySelect,
-        timeOfDaySelect,
-    ];
-
-    filterDropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("change", filterTasks);
-    });
-
     function addTask() {
         const taskText = taskInput.value.trim();
         if (taskText === "") return;
@@ -38,40 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const taskItem = document.createElement("li");
         taskItem.textContent = taskText;
 
-        taskList.appendChild(taskItem);
-        taskInput.value = "";
-    }
-
-    function filterTasks() {
-        const filters = {
-            priority: prioritySelect.value,
-            timeframe: timeframeSelect.value,
-            taskType: taskTypeSelect.value,
-            urgency: urgencySelect.value,
-            moodEnergy: moodEnergySelect.value,
-            timeOfDay: timeOfDaySelect.value,
+        const attributes = {
+            Priority: prioritySelect.value,
+            Timeframe: timeframeSelect.value,
+            "Task Type": taskTypeSelect.value,
+            Urgency: urgencySelect.value,
+            "Mood and Energy": moodEnergySelect.value,
+            "Time of Day": timeOfDaySelect.value,
         };
 
-        // Loop through the task items and check if they match the filters
-        const taskItems = taskList.getElementsByTagName("li");
-        for (let i = 0; i < taskItems.length; i++) {
-            const taskItem = taskItems[i];
-            const taskDetails = taskItem.textContent;
-
-            if (isTaskFiltered(taskDetails, filters)) {
-                taskItem.style.display = "block";
-            } else {
-                taskItem.style.display = "none";
+        for (const [key, value] of Object.entries(attributes)) {
+            if (value !== "") {
+                const attributeItem = document.createElement("div");
+                attributeItem.textContent = key + ": " + value;
+                taskItem.appendChild(attributeItem);
             }
         }
-    }
 
-    function isTaskFiltered(taskDetails, filters) {
-        for (const key in filters) {
-            if (filters[key] !== "All" && taskDetails.indexOf(filters[key]) === -1) {
-                return false;
-            }
-        }
-        return true;
+        taskList.appendChild(taskItem);
+        taskInput.value = "";
     }
 });
