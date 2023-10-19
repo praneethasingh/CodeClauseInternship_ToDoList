@@ -1,6 +1,41 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    overflow: auto;
+    background-color: #f3f3f3;
+}
+
+.left-side {
+    width: 30%;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 2px solid #000; /* Vertical line */
+    height: 100vh;
+    overflow: auto;
+}
+
+.right-side {
+    flex: 1;
+    width: 70%;
+    background-color: #fff;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 20px, #ccc 20px, #ccc 21px);
+    background-size: 100% 30px; /* Adjust the height of the lines as needed */
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: auto;
+}
+
+
+.vertical-line {
+    border-left: 2px solid #000; /* Adjust thickness and color as needed */
+    height: 100%;
 }
 
 .container {
@@ -80,4 +115,3 @@ body {
     width: 45%;
 }
 
-/* Add more CSS styles as needed */
